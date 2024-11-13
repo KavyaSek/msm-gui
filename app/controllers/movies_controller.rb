@@ -37,4 +37,33 @@ class MoviesController < ApplicationController
 
     render({ :template => "movie_templates/show" })
   end
+
+  def delete
+    the_id = params.fetch("path_id")
+    movie = Movie.find(the_id)
+    movie.destroy
+    redirect_to("/movies")
+  end
+
+  def update
+    @title = params[:movie_title]
+    @year = params[:movie_year]
+    @dur = params[:movie_duration]
+    @desc = params[:movie_description]
+    @img = params[:movie_image]
+    @dir = params[:director_id]    
+    @the_id = params.fetch("path_id") 
+
+    a = Movie.find(@the_id)
+    a.title = @title
+    a.year = @year
+    a.duration = @dur
+    a.description = @desc
+    a.image = @img
+    a.director_id = @dir
+    a.save
+        
+    redirect_to("/movies/#{@the_id}")
+end
+
 end
