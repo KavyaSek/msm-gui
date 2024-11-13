@@ -23,7 +23,6 @@ class ActorsController < ApplicationController
     redirect_to("/")
   end
 
-
   def show
     the_id = params.fetch("path_id")
 
